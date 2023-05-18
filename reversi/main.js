@@ -1,17 +1,20 @@
-import "./style.css";
-import javascriptLogo from "./javascript.svg";
-import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.js";
+// import "./style.css";
+// import javascriptLogo from "./javascript.svg";
+// import viteLogo from "/vite.svg";
+// import { setupCounter } from "./counter.js";
+const boardEl = document.querySelector(".board");
 
-document.querySelector("#app").innerHTML = `
-  <div>
+const inputLength = 4;
+let row = inputLength;
+let column = inputLength;
+const board = [];
+for (let i = 0; i < row; i++) {
+  board[i] = [];
+  console.log("row", board);
+  for (let j = 0; j < column; j++) {
+    board[i][j] = 0;
+  }
+}
 
-    <h1>Hello!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-  
-  </div>
-`;
-
-setupCounter(document.querySelector("#counter"));
+boardEl.innerHTML = board;
+console.log(board);
