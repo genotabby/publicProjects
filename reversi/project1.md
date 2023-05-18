@@ -17,6 +17,8 @@ const COLORS = {
 
 /_----- functions -----_/
 
+MVC
+
 function CheckSurroundings (){
 check_N();
 check_NE();
