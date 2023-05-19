@@ -3,5 +3,26 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: cyan;
+  /* background-color: cyan; */
+}
+
+.board {
+  display: grid;
+  /* grid-template-columns: repeat(3, 10vmin); */
+  /* grid-template-rows: repeat(3, 10vmin);
+  gap: 1vmin;
+  margin-top: 0vmin; */
+}
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 10vmin);
+  grid-template-rows: repeat(3, 10vmin);
+  gap: 1vmin;
+  margin-top: 0vmin;
+}
+
+div {
+  /* boarder-radius 0% of square, 100% for circle */
+  border-radius: 0%;
+  border: 0.1vmin solid grey;
 }
