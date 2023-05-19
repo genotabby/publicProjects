@@ -15,14 +15,26 @@ body {
 }
 #board {
   display: grid;
-  grid-template-columns: repeat(3, 10vmin);
-  grid-template-rows: repeat(3, 10vmin);
+  grid-template-columns: repeat(0, 10vmin);
+  grid-template-rows: repeat(0, 10vmin);
   gap: 1vmin;
   margin-top: 0vmin;
+  background-color: black;
 }
 
 div {
   /* boarder-radius 0% of square, 100% for circle */
   border-radius: 0%;
-  border: 0.1vmin solid grey;
+  /* border: 0.1vmin solid red; */
+  width: 95%;
+  height: 95%;
+  margin: 2.5%;
+}
+
+.pieces {
+  border-radius: 50%;
+}
+
+fieldset {
+  background-color: rgb(84, 150, 109);
 }
