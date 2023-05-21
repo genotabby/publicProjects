@@ -77,7 +77,6 @@ function render() {
   renderControls();
 }
 
-// const renderBoard = () => {
 function renderBoard() {
   const boardSection = document.querySelector("#board");
 
@@ -142,7 +141,7 @@ function checkZeroTurnsLeftRemoveListener() {
 }
 
 function renderMessage() {
-  if (turnsLeft == 0) {
+  if (turnsLeft <= 0) {
     msgEl.innerHTML = "Game over!";
     console.log("game!");
   } else {
