@@ -459,24 +459,24 @@ function changeRowColumnGridStyle(length) {
       "repeat(8, 10vmin)";
   } else if (length == 10) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(10, 10vmin)";
+      "repeat(10, 8vmin)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(10, 10vmin)";
+      "repeat(10, 8vmin)";
   } else if (length == 12) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(12, 8vmin)";
+      "repeat(12, 6vmin)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(12, 8vmin)";
+      "repeat(12, 6vmin)";
   } else if (length == 14) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(14, 8vmin)";
+      "repeat(14, 4vmin)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(14, 8vmin)";
+      "repeat(14, 4vmin)";
   } else if (length == 16) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(16, 6vmin)";
+      "repeat(16, 4vmin)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(16, 6vmin)";
+      "repeat(16, 4vmin)";
   }
 }
 
