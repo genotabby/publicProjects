@@ -37,7 +37,7 @@ function init() {
 /*----- functions -----*/
 function initBoard() {
   const inputLength = document.querySelector("#inputLength").value;
-  length = inputLength;
+  length = Number(inputLength);
   let row = length;
   let column = length;
   const startingBoard = [];
@@ -117,11 +117,11 @@ function playerEvt(evt) {
   console.log("Y", TileCoorY);
   board[TileCoorX][TileCoorY] = turn;
   // document.getElementById("0").removeEventListener("click", playerEvt);
+  checkSurrounding(TileCoorX, TileCoorY);
   turn = turn * -1;
   console.log("player turn: ", turn);
   turnsLeft--;
   console.log("turns Left: ", turnsLeft);
-  checkSurrounding(TileCoorX, TileCoorY);
   render();
   // checkZeroTurnsLeftRemoveListener();
   console.log(board);
@@ -165,8 +165,214 @@ function renderControls() {
 
 function checkSurrounding(TileCoorX, TileCoorY) {
   let count = 0;
-  console.log("S_X", TileCoorX);
-  console.log("S_Y", TileCoorY);
+  let row = length;
+  let column = length;
+  let borderedBoard = [];
+  for (let i = 0; i < row + 2; i++) {
+    borderedBoard[i] = [];
+    for (let j = 0; j < column + 2; j++) {
+      borderedBoard[i][j] = 2;
+    }
+  }
+  console.log("border", borderedBoard);
+
+  //import board into borderedBoard
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < column; j++) {
+      borderedBoard[i + 1][j + 1] = board[i][j];
+    }
+  }
+  console.log(borderedBoard);
+
+  let borderedBoardX = TileCoorX + 1;
+  let borderedBoardY = TileCoorY + 1;
+
+  //check east in bordered
+  let cachedTileCoorXBordered = borderedBoardX;
+  let cachedTileCoorYBordered = borderedBoardY;
+
+  console.log("X", borderedBoardX);
+  console.log("Y", borderedBoardY);
+  console.log("T", turn);
+  while (borderedBoard[borderedBoardX][borderedBoardY + 1] == -turn) {
+    console.log("East works");
+    borderedBoardY++;
+    console.log("borderedBoardY", borderedBoardY);
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX][borderedBoardY + 1] == turn) {
+      console.log("X", borderedBoardX, "Y", borderedBoardY + 1);
+
+      console.log("Check east positive");
+      borderedBoardY = borderedBoardY - count + 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX][borderedBoardY + i] = turn;
+        console.log(borderedBoardX);
+        console.log(borderedBoardY + i);
+        console.log("flip", i);
+      }
+
+      console.log("East complete!");
+    }
+  }
+
+  //Check West
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+
+  count = 0;
+  while (borderedBoard[borderedBoardX][borderedBoardY - 1] == -turn) {
+    console.log("West works");
+    borderedBoardY--;
+    console.log("borderedBoardY", borderedBoardY);
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX][borderedBoardY - 1] == turn) {
+      console.log("X", borderedBoardX, "Y", borderedBoardY + 1);
+
+      console.log("Check west positive");
+      borderedBoardY = borderedBoardY + count - 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX][borderedBoardY - i] = turn;
+        console.log(borderedBoardX);
+        console.log(borderedBoardY + i);
+        console.log("flip", i);
+      }
+
+      console.log("West complete!");
+    }
+  }
+
+  //Check South in bordered
+
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+  count = 0;
+  while (borderedBoard[borderedBoardX + 1][borderedBoardY] == -turn) {
+    console.log("South works");
+    borderedBoardX++;
+    console.log("borderedBoardX", borderedBoardX);
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX + 1][borderedBoardY] == turn) {
+      console.log("X", borderedBoardX + 1, "Y", borderedBoardY);
+
+      console.log("Check south positive");
+      borderedBoardX = borderedBoardX - count + 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX + i][borderedBoardY] = turn;
+        console.log(borderedBoardX + i);
+        console.log(borderedBoardY);
+        console.log("flipB", i);
+      }
+    }
+  }
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+
+  count = 0;
+  //Check North in bordered
+  while (borderedBoard[borderedBoardX - 1][borderedBoardY] == -turn) {
+    console.log("North works");
+    borderedBoardX--;
+    console.log("borderedBoardX", borderedBoardX);
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX - 1][borderedBoardY] == turn) {
+      console.log("Check north positive");
+      borderedBoardX = borderedBoardX + count - 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX - i][borderedBoardY] = turn;
+      }
+    }
+  }
+
+  //Check SE in bordered
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+  count = 0;
+  while (borderedBoard[borderedBoardX + 1][borderedBoardY + 1] == -turn) {
+    console.log("SE works");
+    borderedBoardX++;
+    borderedBoardY++;
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX + 1][borderedBoardY + 1] == turn) {
+      console.log("Check SE positive");
+      borderedBoardX = borderedBoardX - count + 1;
+      borderedBoardY = borderedBoardY - count + 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX + i][borderedBoardY + i] = turn;
+      }
+    }
+  }
+
+  //Check NW in bordered
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+  count = 0;
+  while (borderedBoard[borderedBoardX - 1][borderedBoardY - 1] == -turn) {
+    console.log("NW works");
+    borderedBoardX--;
+    borderedBoardY--;
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX - 1][borderedBoardY - 1] == turn) {
+      console.log("Check SE positive");
+      borderedBoardX = borderedBoardX + count - 1;
+      borderedBoardY = borderedBoardY + count - 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX - i][borderedBoardY - i] = turn;
+      }
+    }
+  }
+
+  //Check NE in bordered
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+  count = 0;
+  while (borderedBoard[borderedBoardX - 1][borderedBoardY + 1] == -turn) {
+    console.log("NE works");
+    borderedBoardX--;
+    borderedBoardY++;
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX - 1][borderedBoardY + 1] == turn) {
+      console.log("Check NE positive");
+      borderedBoardX = borderedBoardX + count - 1;
+      borderedBoardY = borderedBoardY - count + 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX - i][borderedBoardY + i] = turn;
+      }
+    }
+  }
+
+  //Check SW in bordered
+  borderedBoardX = cachedTileCoorXBordered;
+  borderedBoardY = cachedTileCoorYBordered;
+  count = 0;
+  while (borderedBoard[borderedBoardX + 1][borderedBoardY - 1] == -turn) {
+    console.log("NE works");
+    borderedBoardX++;
+    borderedBoardY--;
+    count++;
+    console.log("count", count);
+    if (borderedBoard[borderedBoardX + 1][borderedBoardY - 1] == turn) {
+      console.log("Check NE positive");
+      borderedBoardX = borderedBoardX - count + 1;
+      borderedBoardY = borderedBoardY + count - 1;
+      for (let i = 0; i < count; i++) {
+        borderedBoard[borderedBoardX + i][borderedBoardY - i] = turn;
+      }
+    }
+  }
+
+  //Port borderedBoard back to board
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < column; j++) {
+      board[i][j] = borderedBoard[i + 1][j + 1];
+    }
+  }
 }
 
 function changeRowColumnGridStyle(length) {
