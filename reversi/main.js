@@ -121,6 +121,7 @@ function playerEvt(evt) {
   console.log("player turn: ", turn);
   turnsLeft--;
   console.log("turns Left: ", turnsLeft);
+  checkSurrounding(TileCoorX, TileCoorY);
   render();
   // checkZeroTurnsLeftRemoveListener();
   console.log(board);
@@ -160,6 +161,12 @@ function renderControls() {
     msgEl.style.visibility = "hidden";
     turnWindow.style.visibility = "hidden";
   }
+}
+
+function checkSurrounding(TileCoorX, TileCoorY) {
+  let count = 0;
+  console.log("S_X", TileCoorX);
+  console.log("S_Y", TileCoorY);
 }
 
 function changeRowColumnGridStyle(length) {
