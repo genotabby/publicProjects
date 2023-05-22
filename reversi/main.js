@@ -442,39 +442,36 @@ function checkSurrounding(TileCoorX, TileCoorY) {
 function changeRowColumnGridStyle(length) {
   if (length == 4) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(4, 10vmin)";
-    document.getElementById("board").style.gridTemplateRows =
-      "repeat(4, 10vmin)";
+      "repeat(4, 80px)";
+    document.getElementById("board").style.gridTemplateRows = "repeat(4, 80px)";
   } else if (length == 6) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(6, 10vmin)";
-    document.getElementById("board").style.gridTemplateRows =
-      "repeat(6, 10vmin)";
+      "repeat(6, 60px)";
+    document.getElementById("board").style.gridTemplateRows = "repeat(6, 60px)";
   } else if (length == 8) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(8, 10vmin)";
-    document.getElementById("board").style.gridTemplateRows =
-      "repeat(8, 10vmin)";
+      "repeat(8, 40px)";
+    document.getElementById("board").style.gridTemplateRows = "repeat(8, 40px)";
   } else if (length == 10) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(10, 8vmin)";
+      "repeat(10, 35px)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(10, 8vmin)";
+      "repeat(10, 35px)";
   } else if (length == 12) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(12, 6vmin)";
+      "repeat(12, 30px)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(12, 6vmin)";
+      "repeat(12, 30px)";
   } else if (length == 14) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(14, 4vmin)";
+      "repeat(14, 25px)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(14, 4vmin)";
+      "repeat(14, 25px)";
   } else if (length == 16) {
     document.getElementById("board").style.gridTemplateColumns =
-      "repeat(16, 4vmin)";
+      "repeat(16, 20px)";
     document.getElementById("board").style.gridTemplateRows =
-      "repeat(16, 4vmin)";
+      "repeat(16, 20px)";
   }
 }
 
