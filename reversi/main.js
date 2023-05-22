@@ -20,6 +20,8 @@ let startedGame = null;
 let maxTurns;
 let turnsLeft;
 let length;
+let whiteCount = 0;
+let blackCount = 0;
 
 /*----- cached elements  -----*/
 const turnWindow = document.querySelector("#turnWindow");
@@ -65,8 +67,6 @@ function initBoard() {
   maxTurns = length * length - 4;
   turnsLeft = maxTurns;
   console.log("max turns: ", maxTurns);
-  // board[2][2] = 1;
-  // board[6][6] = 1;
 
   render();
 }
@@ -118,13 +118,16 @@ function playerEvt(evt) {
   board[TileCoorX][TileCoorY] = turn;
   // document.getElementById("0").removeEventListener("click", playerEvt);
   checkSurrounding(TileCoorX, TileCoorY);
+  checkCount();
+  console.log("bC", blackCount);
+  console.log("wC", whiteCount);
   turn = turn * -1;
   console.log("player turn: ", turn);
   turnsLeft--;
   console.log("turns Left: ", turnsLeft);
-  render();
   // checkZeroTurnsLeftRemoveListener();
   console.log(board);
+  render();
 }
 
 function checkZeroTurnsLeftRemoveListener() {
@@ -163,6 +166,20 @@ function renderControls() {
   }
 }
 
+function checkCount() {
+  let row = length;
+  let column = length;
+  whiteCount = 0;
+  blackCount = 0;
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < column; j++) {
+      if (board[i][j] == 1) {
+        whiteCount++;
+      }
+      if (board[i][j] == -1) blackCount++;
+    }
+  }
+}
 function checkSurrounding(TileCoorX, TileCoorY) {
   let count = 0;
   let row = length;
