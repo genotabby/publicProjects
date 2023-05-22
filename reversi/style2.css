@@ -32,6 +32,20 @@ div {
   margin: 2.5%;
 }
 
+#events {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#events #blackFieldset {
+  background-color: white;
+}
+#events #whiteFieldset {
+  background-color: black;
+  color: white;
+}
+
 .pieces {
   border-radius: 50%;
 }

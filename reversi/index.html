@@ -11,17 +11,23 @@
     <div id="app"></div>
     <h1>Reversi</h1>
     <label id="lengthEl">
-      Length of Rows and Columns (Even numbers):
+      Length of Rows and Columns (Even numbers 4-16):
       <input name="inputLength" id="inputLength" type="number" value="8" />
     </label>
     <br />
     <button id="startButton">Start game!</button>
-    <span id="whiteCount">White Count</span>
-    <span id="turnsLeft">turnsLeft</span>
     <fieldset id="turnWindow">
       <p class="msgEl">Player 1's turn</p>
     </fieldset>
-    <span id="blackCount">Black Count</span>
+    <div id="events">
+      <fieldset id="whiteFieldset">
+        <span id="whiteCount">White Count</span>
+      </fieldset>
+      <fieldset id="blackFieldset">
+        <span id="blackCount"> Black Count</span>
+      </fieldset>
+    </div>
+    <span id="turnsLeft">turnsLeft</span>
     <button id="playAgain">Play again?</button>
     <br />
     <section id="board"></section>

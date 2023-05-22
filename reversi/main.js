@@ -6,7 +6,6 @@
 
 const COLORS = {
   0: "rgb(84,150,109)",
-  // 1: "rgb(209,209,209)",
   1: "white",
   "-1": "black",
 };
@@ -32,6 +31,7 @@ const whiteCountEl = document.querySelector("#whiteCount");
 const blackCountEl = document.querySelector("#blackCount");
 const turnsLeftEl = document.querySelector("#turnsLeft");
 const playAgainButton = document.querySelector("#playAgain");
+const eventsEl = document.querySelector("#events");
 
 /*----- event listeners -----*/
 
@@ -128,12 +128,8 @@ function playerEvt(evt) {
   // document.getElementById("0").removeEventListener("click", playerEvt);
   checkSurrounding(TileCoorX, TileCoorY);
   checkCount();
-  console.log("bC", blackCount);
-  console.log("wC", whiteCount);
   turn = turn * -1;
-  console.log("player turn: ", turn);
   // turnsLeft--;
-  console.log("turns Left: ", turnsLeft);
   // checkZeroTurnsLeftRemoveListener();
   console.log(board);
   checkWinner();
@@ -195,6 +191,7 @@ function renderControls() {
     msgEl.style.visibility = "visible";
     turnWindow.style.visibility = "visible";
     boardSection.style.visibility = "visible";
+    eventsEl.style.visibility = "visible";
     if (winner === "T" || winner == 1 || winner == -1) {
       playAgainButton.style.visibility = "visible";
     }
@@ -208,6 +205,7 @@ function renderControls() {
     turnWindow.style.visibility = "hidden";
     boardSection.style.visibility = "hidden";
     playAgainButton.style.visibility = "hidden";
+    eventsEl.style.visibility = "hidden";
   }
 }
 
