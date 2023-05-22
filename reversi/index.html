@@ -10,15 +10,19 @@
   <body>
     <div id="app"></div>
     <h1>Reversi</h1>
-    <label>
+    <label id="lengthEl">
       Length of Rows and Columns (Even numbers):
       <input name="inputLength" id="inputLength" type="number" value="8" />
     </label>
     <br />
     <button id="startButton">Start game!</button>
+    <span id="whiteCount">White Count</span>
+    <span id="turnsLeft">turnsLeft</span>
     <fieldset id="turnWindow">
       <p class="msgEl">Player 1's turn</p>
     </fieldset>
+    <span id="blackCount">Black Count</span>
+    <button id="playAgain">Play again?</button>
     <br />
     <section id="board"></section>
     <script defer type="module" src="/main.js"></script>

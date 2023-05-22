@@ -13,6 +13,7 @@ body {
   gap: 1vmin;
   margin-top: 0vmin; */
 }
+
 #board {
   display: grid;
   grid-template-columns: repeat(0, 10vmin);

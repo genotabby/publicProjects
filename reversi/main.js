@@ -3,8 +3,7 @@
 // import javascriptLogo from "./javascript.svg";
 // import viteLogo from "/vite.svg";
 // import { setupCounter } from "./counter.js";
-const boardEl = document.querySelector(".board");
-const msgEl = document.querySelector(".msgEl");
+
 const COLORS = {
   0: "rgb(84,150,109)",
   // 1: "rgb(209,209,209)",
@@ -26,17 +25,27 @@ let blackCount = 0;
 /*----- cached elements  -----*/
 const turnWindow = document.querySelector("#turnWindow");
 const startButton = document.querySelector("#startButton");
+const boardSection = document.querySelector("#board");
+const lengthEl = document.querySelector("#lengthEl");
+const msgEl = document.querySelector(".msgEl");
+const whiteCountEl = document.querySelector("#whiteCount");
+const blackCountEl = document.querySelector("#blackCount");
+const turnsLeftEl = document.querySelector("#turnsLeft");
+const playAgainButton = document.querySelector("#playAgain");
 
 /*----- event listeners -----*/
 
+startButton.addEventListener("click", initBoard);
+
+playAgainButton.addEventListener("click", init);
+/*----- functions -----*/
+
 function init() {
-  startButton.addEventListener("click", initBoard);
+  startedGame = null;
   render();
-  // const startingBoard = initBoard();
   console.log("Starting board", board);
 }
 
-/*----- functions -----*/
 function initBoard() {
   const inputLength = document.querySelector("#inputLength").value;
   length = Number(inputLength);
@@ -65,9 +74,9 @@ function initBoard() {
   console.log("Init board", startingBoard);
   board = startingBoard;
   maxTurns = length * length - 4;
-  turnsLeft = maxTurns;
+  // turnsLeft = maxTurns;
   console.log("max turns: ", maxTurns);
-
+  checkCount();
   render();
 }
 
@@ -78,7 +87,7 @@ function render() {
 }
 
 function renderBoard() {
-  const boardSection = document.querySelector("#board");
+  // const boardSection = document.querySelector("#board");
 
   //Clear everything
   boardSection.innerHTML = "";
@@ -123,10 +132,11 @@ function playerEvt(evt) {
   console.log("wC", whiteCount);
   turn = turn * -1;
   console.log("player turn: ", turn);
-  turnsLeft--;
+  // turnsLeft--;
   console.log("turns Left: ", turnsLeft);
   // checkZeroTurnsLeftRemoveListener();
   console.log(board);
+  checkWinner();
   render();
 }
 
@@ -135,18 +145,39 @@ function checkZeroTurnsLeftRemoveListener() {
     console.log("GAMEOVER");
     board.forEach(function (colArr, colIdx) {
       // Iterate over the cells in the cur column (colArr)
-      colArr.forEach(function (cellVal, rowIdx) {
-        // divPieces.classList.add("pieces");
-        // divPieces.removeEventListener("click", playerEvt);
-        // divSquare.append(divPieces);
-      });
+      colArr.forEach(function (cellVal, rowIdx) {});
     });
+  }
+}
+function checkWinner() {
+  if (turnsLeft === 0) {
+    if (blackCount > whiteCount) {
+      winner = -1;
+      console.log("black winner");
+    } else if (whiteCount > blackCount) {
+      winner = 1;
+    } else if (whiteCount === blackCount) {
+      winner = "T";
+    }
   }
 }
 
 function renderMessage() {
-  if (turnsLeft <= 0) {
-    msgEl.innerHTML = "Game over!";
+  whiteCountEl.innerHTML = `White count: ${whiteCount}`;
+  blackCountEl.innerHTML = `Black count: ${blackCount}`;
+  turnsLeftEl.innerHTML = `Turns left: ${turnsLeft}`;
+  if (turnsLeft === 0 && winner === -1) {
+    msgEl.innerHTML = `Game over!<br><span style="color: ${
+      COLORS[-1]
+    }">${COLORS[-1].toUpperCase()}</span> wins!`;
+    console.log("game!");
+  } else if (turnsLeft === 0 && winner === 1) {
+    msgEl.innerHTML = `Game over!<br><span style="color: ${
+      COLORS[1]
+    }">${COLORS[1].toUpperCase()}</span> Wins!`;
+    console.log("game!");
+  } else if (turnsLeft === 0 && winner === "T") {
+    msgEl.innerHTML = "Game over!<br>It's a Tie!";
     console.log("game!");
   } else {
     msgEl.innerHTML = `<span style="color: ${COLORS[turn]}">${COLORS[
@@ -157,26 +188,47 @@ function renderMessage() {
 function renderControls() {
   if (startedGame) {
     startButton.style.visibility = "hidden";
+    lengthEl.style.visibility = "hidden";
+    turnsLeftEl.style.visibility = "visible";
+    whiteCountEl.style.visibility = "visible";
+    blackCountEl.style.visibility = "visible";
     msgEl.style.visibility = "visible";
     turnWindow.style.visibility = "visible";
+    boardSection.style.visibility = "visible";
+    if (winner === "T" || winner == 1 || winner == -1) {
+      playAgainButton.style.visibility = "visible";
+    }
   } else {
     startButton.style.visibility = "visible";
+    lengthEl.style.visibility = "visible";
+    turnsLeftEl.style.visibility = "hidden";
+    whiteCountEl.style.visibility = "hidden";
+    blackCountEl.style.visibility = "hidden";
     msgEl.style.visibility = "hidden";
     turnWindow.style.visibility = "hidden";
+    boardSection.style.visibility = "hidden";
+    playAgainButton.style.visibility = "hidden";
   }
 }
 
 function checkCount() {
   let row = length;
   let column = length;
+  //Clear counts to populate later
   whiteCount = 0;
   blackCount = 0;
+  turnsLeft = 0;
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < column; j++) {
       if (board[i][j] == 1) {
         whiteCount++;
       }
-      if (board[i][j] == -1) blackCount++;
+      if (board[i][j] == -1) {
+        blackCount++;
+      }
+      if (board[i][j] == 0) {
+        turnsLeft++;
+      }
     }
   }
 }
@@ -208,9 +260,6 @@ function checkSurrounding(TileCoorX, TileCoorY) {
   let cachedTileCoorXBordered = borderedBoardX;
   let cachedTileCoorYBordered = borderedBoardY;
 
-  console.log("X", borderedBoardX);
-  console.log("Y", borderedBoardY);
-  console.log("T", turn);
   while (borderedBoard[borderedBoardX][borderedBoardY + 1] == -turn) {
     console.log("East works");
     borderedBoardY++;
@@ -423,6 +472,11 @@ function changeRowColumnGridStyle(length) {
       "repeat(14, 8vmin)";
     document.getElementById("board").style.gridTemplateRows =
       "repeat(14, 8vmin)";
+  } else if (length == 16) {
+    document.getElementById("board").style.gridTemplateColumns =
+      "repeat(16, 6vmin)";
+    document.getElementById("board").style.gridTemplateRows =
+      "repeat(16, 6vmin)";
   }
 }
 
