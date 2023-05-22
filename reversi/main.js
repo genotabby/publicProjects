@@ -15,7 +15,7 @@ let board = [];
 let turn = 1; // 1 or -1
 let winner = null; //null = no winner; 1 or -1 = winner; 'T' = Tie
 let startedGame = null;
-let maxTurns;
+// let maxTurns;
 let turnsLeft;
 let length;
 let whiteCount = 0;
@@ -36,8 +36,8 @@ const eventsEl = document.querySelector("#events");
 /*----- event listeners -----*/
 
 startButton.addEventListener("click", initBoard);
-
 playAgainButton.addEventListener("click", init);
+
 /*----- functions -----*/
 
 function init() {
@@ -73,9 +73,9 @@ function initBoard() {
   console.log("turn", turn);
   console.log("Init board", startingBoard);
   board = startingBoard;
-  maxTurns = length * length - 4;
+  // maxTurns = length * length - 4;
   // turnsLeft = maxTurns;
-  console.log("max turns: ", maxTurns);
+  // console.log("max turns: ", maxTurns);
   checkCount();
   render();
 }
@@ -88,7 +88,6 @@ function render() {
 
 function renderBoard() {
   // const boardSection = document.querySelector("#board");
-
   //Clear everything
   boardSection.innerHTML = "";
   let cell = 0;
@@ -100,7 +99,6 @@ function renderBoard() {
       divSquare.style.backgroundColor = COLORS[0];
       const divPieces = document.createElement("div");
       divPieces.classList.add("pieces");
-      // divPieces.id = `c${colIdx}r${rowIdx}`;
       divPieces.id = cell;
       cell++;
       // console.log("evtListener", turnsLeft);
@@ -117,34 +115,48 @@ function renderBoard() {
 
 function playerEvt(evt) {
   let TileCoor = evt.target.getAttribute("id");
-  TileCoor;
-  console.log("length", length);
-  console.log("tileCoor:", TileCoor);
+  // TileCoor;
+  // console.log("length", length);
+  // console.log("tileCoor:", TileCoor);
   let TileCoorX = Math.floor(TileCoor / length);
   let TileCoorY = TileCoor % length;
-  console.log("X:", TileCoorX);
-  console.log("Y", TileCoorY);
+  // console.log("X:", TileCoorX);
+  // console.log("Y", TileCoorY);
+  if (board[TileCoorX][TileCoorY] === 1 || board[TileCoorX][TileCoorY] === -1) {
+    return;
+  }
   board[TileCoorX][TileCoorY] = turn;
+
+  // let targetId = document.getElementById("0");
+  // targetId.removeEventListener("click", playerEvt);
+
   // document.getElementById("0").removeEventListener("click", playerEvt);
+
   checkSurrounding(TileCoorX, TileCoorY);
   checkCount();
   turn = turn * -1;
-  // turnsLeft--;
   // checkZeroTurnsLeftRemoveListener();
   console.log(board);
   checkWinner();
   render();
 }
 
-function checkZeroTurnsLeftRemoveListener() {
-  if (turnsLeft === 0) {
-    console.log("GAMEOVER");
-    board.forEach(function (colArr, colIdx) {
-      // Iterate over the cells in the cur column (colArr)
-      colArr.forEach(function (cellVal, rowIdx) {});
-    });
-  }
-}
+// function checkZeroTurnsLeftRemoveListener() {
+//   let row = length;
+//   let column = length;
+//   let cell = 0;
+//   if (turnsLeft === 0) {
+//     console.log("CHCKGAMEOVER");
+//     for (let i = 0; i < row; i++) {
+//       for (let j = 0; j < column; j++) {
+//         document.getElementById(cell).removeEventListener("click", playerEvt);
+//         cell++;
+//         console.log("cell", cell);
+//       }
+//     }
+//   }
+//   console.log(cell);
+// }
 function checkWinner() {
   if (turnsLeft === 0) {
     if (blackCount > whiteCount) {
@@ -166,15 +178,12 @@ function renderMessage() {
     msgEl.innerHTML = `Game over!<br><span style="color: ${
       COLORS[-1]
     }">${COLORS[-1].toUpperCase()}</span> wins!`;
-    console.log("game!");
   } else if (turnsLeft === 0 && winner === 1) {
     msgEl.innerHTML = `Game over!<br><span style="color: ${
       COLORS[1]
     }">${COLORS[1].toUpperCase()}</span> Wins!`;
-    console.log("game!");
   } else if (turnsLeft === 0 && winner === "T") {
     msgEl.innerHTML = "Game over!<br>It's a Tie!";
-    console.log("game!");
   } else {
     msgEl.innerHTML = `<span style="color: ${COLORS[turn]}">${COLORS[
       turn
@@ -241,8 +250,6 @@ function checkSurrounding(TileCoorX, TileCoorY) {
       borderedBoard[i][j] = 2;
     }
   }
-  console.log("border", borderedBoard);
-
   //import board into borderedBoard
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < column; j++) {

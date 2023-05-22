@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: cyan; */
+  /* background-color: RGB(105, 207, 254); */
 }
 
 .board {
@@ -24,7 +24,7 @@ body {
 }
 
 div {
-  /* boarder-radius 0% of square, 100% for circle */
+  /* boarder-radius 0% for square, 100% for circle */
   border-radius: 0%;
   /* border: 0.1vmin solid red; */
   width: 95%;
@@ -38,16 +38,25 @@ div {
   justify-content: center;
 }
 
-#events #blackFieldset {
+#events #whiteFieldset {
   background-color: white;
 }
-#events #whiteFieldset {
+#events #blackFieldset {
   background-color: black;
   color: white;
 }
 
 .pieces {
   border-radius: 50%;
+  transition: background-color 1s ease-out;
+  border-color: red;
+  /* border: 0.1vmin; */
+}
+.pieces:hover {
+  transform: scale(1.05);
+  transition: transform 150ms ease-in;
+  cursor: pointer;
+  border-color: red;
 }
 
 fieldset {
