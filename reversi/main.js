@@ -101,11 +101,7 @@ function renderBoard() {
       divPieces.classList.add("pieces");
       divPieces.id = cell;
       cell++;
-      // console.log("evtListener", turnsLeft);
-      // if (turnsLeft == 0) {
-      //   divPieces.removeEventListener("click", playerEvt);
-      //   console.log("GAME");
-      // }
+
       divPieces.addEventListener("click", playerEvt);
       divSquare.append(divPieces);
       if (cellVal === -1) {
@@ -134,15 +130,9 @@ function playerEvt(evt) {
   }
   board[TileCoorX][TileCoorY] = turn;
 
-  // let targetId = document.getElementById("0");
-  // targetId.removeEventListener("click", playerEvt);
-
-  // document.getElementById("0").removeEventListener("click", playerEvt);
-
   checkSurrounding(TileCoorX, TileCoorY);
   checkCount();
   turn = turn * -1;
-  // checkZeroTurnsLeftRemoveListener();
   console.log(board);
   checkWinner();
   render();
