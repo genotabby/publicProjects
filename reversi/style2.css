@@ -52,13 +52,22 @@ div {
   border-color: red;
   border: 10px;
 }
-.pieces:hover {
-  transform: scale(1.05);
-  /* transition: transform 150ms ease-in; */
-  cursor: pointer;
-  /* border-color: red; */
-  background-color: yellow;
+/* .blankTile:hover {
+  transform: scale(1.05); */
+/* transition: transform 150ms ease-in; */
+/* cursor: pointer; */
+/* border-color: red; */
+/* background-color: yellow;
+} */
+.whiteTurn:hover {
+  background-color: white;
+  transform: scale(1.1);
 }
+.blackTurn:hover {
+  background-color: black;
+  transform: scale(1.1);
+}
+
 .blackPiece {
   background-color: black;
 }

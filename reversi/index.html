@@ -12,7 +12,15 @@
     <h1>Reversi</h1>
     <label id="lengthEl">
       Length of Rows and Columns (Even numbers 4-16):
-      <input name="inputLength" id="inputLength" type="number" value="8" />
+      <input
+        name="inputLength"
+        id="inputLength"
+        type="number"
+        value="8"
+        min="4"
+        max="16"
+        step="2"
+      />
     </label>
     <br />
     <button id="startButton">Start game!</button>

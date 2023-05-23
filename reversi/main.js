@@ -109,7 +109,12 @@ function renderBoard() {
       } else if (cellVal == 1) {
         divPieces.classList.add("whitePiece");
       } else {
-        // divPieces.classList.add("blankTile");
+        divPieces.classList.add("blankTile");
+        if (turn === 1) {
+          divPieces.classList.add("whiteTurn");
+        } else if (turn === -1) {
+          divPieces.classList.add("blackTurn");
+        }
       }
       // divPieces.style.backgroundColor = COLORS[cellVal];
     });
