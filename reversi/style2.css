@@ -59,12 +59,23 @@ div {
 /* border-color: red; */
 /* background-color: yellow;
 } */
-.whiteTurn:hover {
+.possibleWhitePiece {
   background-color: white;
+  opacity: 20%;
+}
+.possibleBlackPiece {
+  background-color: black;
+  opacity: 20%;
+}
+
+.possibleWhitePiece:hover {
+  /* background-color: white; */
+  opacity: 80%;
   transform: scale(1.1);
 }
-.blackTurn:hover {
-  background-color: black;
+.possibleBlackPiece:hover {
+  /* background-color: black; */
+  opacity: 80%;
   transform: scale(1.1);
 }
 

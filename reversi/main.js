@@ -15,11 +15,14 @@ let board = [];
 let turn = 1; // 1 or -1
 let winner = null; //null = no winner; 1 or -1 = winner; 'T' = Tie
 let startedGame = null;
+let skipTurn = false;
 // let maxTurns;
-let turnsLeft;
+let blankCount;
 let length;
 let whiteCount = 0;
 let blackCount = 0;
+let possibleWhiteCount = 0;
+let possibleBlackCount = 0;
 
 /*----- cached elements  -----*/
 const turnWindow = document.querySelector("#turnWindow");
@@ -48,6 +51,7 @@ function init() {
 
 function initBoard() {
   const inputLength = document.querySelector("#inputLength").value;
+  console.log(inputLength);
   length = Number(inputLength);
   let row = length;
   let column = length;
@@ -73,9 +77,7 @@ function initBoard() {
   console.log("turn", turn);
   console.log("Init board", startingBoard);
   board = startingBoard;
-  // maxTurns = length * length - 4;
-  // turnsLeft = maxTurns;
-  // console.log("max turns: ", maxTurns);
+  checkPlaceableTiles();
   checkCount();
   render();
 }
@@ -87,8 +89,8 @@ function render() {
 }
 
 function renderBoard() {
-  // const boardSection = document.querySelector("#board");
   //Clear everything
+  // checkPlaceableTiles();
   boardSection.innerHTML = "";
   let cell = 0;
   board.forEach(function (colArr, colIdx) {
@@ -106,9 +108,15 @@ function renderBoard() {
       divSquare.append(divPieces);
       if (cellVal === -1) {
         divPieces.classList.add("blackPiece");
+      } else if (cellVal == -2) {
+        divPieces.classList.add("possibleBlackPiece");
       } else if (cellVal == 1) {
         divPieces.classList.add("whitePiece");
-      } else {
+      } else if (cellVal == 2) {
+        divPieces.classList.add("possibleWhitePiece");
+      }
+      //to hover over pieces
+      else {
         divPieces.classList.add("blankTile");
         if (turn === 1) {
           divPieces.classList.add("whiteTurn");
@@ -123,49 +131,58 @@ function renderBoard() {
 
 function playerEvt(evt) {
   let TileCoor = evt.target.getAttribute("id");
-  // TileCoor;
-  // console.log("length", length);
-  // console.log("tileCoor:", TileCoor);
   let TileCoorX = Math.floor(TileCoor / length);
   let TileCoorY = TileCoor % length;
-  // console.log("X:", TileCoorX);
-  // console.log("Y", TileCoorY);
-  if (board[TileCoorX][TileCoorY] === 1 || board[TileCoorX][TileCoorY] === -1) {
+  if (
+    board[TileCoorX][TileCoorY] === 1 ||
+    board[TileCoorX][TileCoorY] === -1 ||
+    board[TileCoorX][TileCoorY] === 0
+  ) {
     return;
   }
   board[TileCoorX][TileCoorY] = turn;
 
   checkSurrounding(TileCoorX, TileCoorY);
+  turn = -turn;
+  checkPlaceableTiles();
   checkCount();
-  turn = turn * -1;
   console.log(board);
   checkWinner();
   render();
+  checkSkip();
+  console.log("turn", turn);
+
+  // console.log("turnAftSkip", turn);
 }
 
-// function checkZeroTurnsLeftRemoveListener() {
-//   let row = length;
-//   let column = length;
-//   let cell = 0;
-//   if (turnsLeft === 0) {
-//     console.log("CHCKGAMEOVER");
-//     for (let i = 0; i < row; i++) {
-//       for (let j = 0; j < column; j++) {
-//         document.getElementById(cell).removeEventListener("click", playerEvt);
-//         cell++;
-//         console.log("cell", cell);
-//       }
-//     }
-//   }
-//   console.log(cell);
-// }
+function checkSkip() {
+  console.log("enterSkip");
+  if (
+    (turn === 1 && possibleWhiteCount === 0) ||
+    (turn === -1 && possibleBlackCount === 0)
+  ) {
+    turn = -turn;
+    checkPlaceableTiles();
+    checkCount();
+    render();
+    console.log("SKIPPED");
+  }
+}
+
 function checkWinner() {
-  if (turnsLeft === 0) {
+  let trulyEmptyTiles = blankCount + possibleBlackCount + possibleWhiteCount;
+
+  // if () {
+  //   console.log("possibleblack 0");
+  //   skipTurn = true;
+  // }
+  if (trulyEmptyTiles === 0) {
     if (blackCount > whiteCount) {
       winner = -1;
-      console.log("black winner");
+      console.log("black wins");
     } else if (whiteCount > blackCount) {
       winner = 1;
+      console.log("white wins");
     } else if (whiteCount === blackCount) {
       winner = "T";
     }
@@ -175,16 +192,16 @@ function checkWinner() {
 function renderMessage() {
   whiteCountEl.innerHTML = `White count: ${whiteCount}`;
   blackCountEl.innerHTML = `Black count: ${blackCount}`;
-  turnsLeftEl.innerHTML = `Turns left: ${turnsLeft}`;
-  if (turnsLeft === 0 && winner === -1) {
+  // turnsLeftEl.innerHTML = `Turns left: ${}`;
+  if (winner === -1) {
     msgEl.innerHTML = `Game over!<br><span style="color: ${
       COLORS[-1]
     }">${COLORS[-1].toUpperCase()}</span> wins!`;
-  } else if (turnsLeft === 0 && winner === 1) {
+  } else if (winner === 1) {
     msgEl.innerHTML = `Game over!<br><span style="color: ${
       COLORS[1]
     }">${COLORS[1].toUpperCase()}</span> Wins!`;
-  } else if (turnsLeft === 0 && winner === "T") {
+  } else if (winner === "T") {
     msgEl.innerHTML = "Game over!<br>It's a Tie!";
   } else {
     msgEl.innerHTML = `<span style="color: ${COLORS[turn]}">${COLORS[
@@ -226,7 +243,9 @@ function checkCount() {
   //Clear counts to populate later
   whiteCount = 0;
   blackCount = 0;
-  turnsLeft = 0;
+  possibleWhiteCount = 0;
+  possibleBlackCount = 0;
+  blankCount = 0;
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < column; j++) {
       if (board[i][j] == 1) {
@@ -236,11 +255,180 @@ function checkCount() {
         blackCount++;
       }
       if (board[i][j] == 0) {
-        turnsLeft++;
+        blankCount++;
+      }
+      if (board[i][j] == 2) {
+        possibleWhiteCount++;
+      }
+      if (board[i][j] == -2) {
+        possibleBlackCount++;
       }
     }
   }
+  console.log("PWC", possibleWhiteCount, "PBC", possibleBlackCount);
 }
+
+function checkPlaceableTiles() {
+  let count = 0;
+  let row = length;
+  let column = length;
+  let checkBorderedBoard = [];
+  for (let i = 0; i < row + 2; i++) {
+    checkBorderedBoard[i] = [];
+    for (let j = 0; j < column + 2; j++) {
+      checkBorderedBoard[i][j] = 3;
+    }
+  }
+  //import board into borderedBoard
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < column; j++) {
+      checkBorderedBoard[i + 1][j + 1] = board[i][j];
+    }
+  }
+  console.log("checkTurn", turn);
+
+  let cell = 0;
+  for (let i = 1; i < row + 1; i++) {
+    for (let j = 1; j < column + 1; j++) {
+      if (checkBorderedBoard[i][j] === -2 * turn) {
+        checkBorderedBoard[i][j] = 0;
+      }
+      if (checkBorderedBoard[i][j] === turn) {
+        //check east in bordered
+        let borderedBoardX = i;
+        let borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX][borderedBoardY + 1] == -turn
+        ) {
+          console.log("Check East works");
+          borderedBoardY++;
+          if (checkBorderedBoard[borderedBoardX][borderedBoardY + 1] == 0) {
+            console.log("Check east positive");
+            checkBorderedBoard[borderedBoardX][borderedBoardY + 1] = 2 * turn;
+            console.log("East complete!");
+          }
+        }
+        //check west in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX][borderedBoardY - 1] == -turn
+        ) {
+          console.log("Check west works");
+          borderedBoardY--;
+          console.log("borderedBoardY", borderedBoardY);
+          if (checkBorderedBoard[borderedBoardX][borderedBoardY - 1] == 0) {
+            console.log("Check west positive");
+            checkBorderedBoard[borderedBoardX][borderedBoardY - 1] = 2 * turn;
+            console.log("west complete!");
+          }
+        }
+        //check north in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX - 1][borderedBoardY] == -turn
+        ) {
+          console.log("Check north works");
+          borderedBoardX--;
+          if (checkBorderedBoard[borderedBoardX - 1][borderedBoardY] == 0) {
+            console.log("Check north positive");
+            checkBorderedBoard[borderedBoardX - 1][borderedBoardY] = 2 * turn;
+            console.log("north complete!");
+          }
+        }
+        //check south in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX + 1][borderedBoardY] == -turn
+        ) {
+          console.log("Check south works");
+          borderedBoardX++;
+          if (checkBorderedBoard[borderedBoardX + 1][borderedBoardY] == 0) {
+            console.log("Check south positive");
+            checkBorderedBoard[borderedBoardX + 1][borderedBoardY] = 2 * turn;
+            console.log("south complete!");
+          }
+        }
+        //check SE in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX + 1][borderedBoardY + 1] == -turn
+        ) {
+          console.log("Check SE works");
+          borderedBoardX++;
+          borderedBoardY++;
+          if (checkBorderedBoard[borderedBoardX + 1][borderedBoardY + 1] == 0) {
+            console.log("Check SE positive");
+            checkBorderedBoard[borderedBoardX + 1][borderedBoardY + 1] =
+              2 * turn;
+            console.log("SE complete!");
+          }
+        }
+        //check NW in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX - 1][borderedBoardY - 1] == -turn
+        ) {
+          console.log("Check NW works");
+          borderedBoardX--;
+          borderedBoardY--;
+          if (checkBorderedBoard[borderedBoardX - 1][borderedBoardY - 1] == 0) {
+            console.log("Check NW positive");
+            checkBorderedBoard[borderedBoardX - 1][borderedBoardY - 1] =
+              2 * turn;
+            console.log("NW complete!");
+          }
+        }
+        //check NE in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX - 1][borderedBoardY + 1] == -turn
+        ) {
+          console.log("Check NE works");
+          borderedBoardX--;
+          borderedBoardY++;
+          if (checkBorderedBoard[borderedBoardX - 1][borderedBoardY + 1] == 0) {
+            console.log("Check NE positive");
+            checkBorderedBoard[borderedBoardX - 1][borderedBoardY + 1] =
+              2 * turn;
+            console.log("NE complete!");
+          }
+        }
+        //check SW in bordered
+        borderedBoardX = i;
+        borderedBoardY = j;
+        while (
+          checkBorderedBoard[borderedBoardX + 1][borderedBoardY - 1] == -turn
+        ) {
+          console.log("Check SW works");
+          borderedBoardX++;
+          borderedBoardY--;
+          if (checkBorderedBoard[borderedBoardX + 1][borderedBoardY - 1] == 0) {
+            console.log("Check SW positive");
+            checkBorderedBoard[borderedBoardX + 1][borderedBoardY - 1] =
+              2 * turn;
+            console.log("SW complete!");
+          }
+        }
+      }
+    }
+  }
+
+  console.log("placeable", checkBorderedBoard);
+
+  //Export borderedBoard back to board
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < column; j++) {
+      board[i][j] = checkBorderedBoard[i + 1][j + 1];
+    }
+  }
+}
+
 function checkSurrounding(TileCoorX, TileCoorY) {
   let count = 0;
   let row = length;
@@ -249,7 +437,7 @@ function checkSurrounding(TileCoorX, TileCoorY) {
   for (let i = 0; i < row + 2; i++) {
     borderedBoard[i] = [];
     for (let j = 0; j < column + 2; j++) {
-      borderedBoard[i][j] = 2;
+      borderedBoard[i][j] = 5;
     }
   }
   //import board into borderedBoard
@@ -258,7 +446,7 @@ function checkSurrounding(TileCoorX, TileCoorY) {
       borderedBoard[i + 1][j + 1] = board[i][j];
     }
   }
-  console.log(borderedBoard);
+  console.log("borderedBoard", borderedBoard);
 
   let borderedBoardX = TileCoorX + 1;
   let borderedBoardY = TileCoorY + 1;
@@ -440,7 +628,7 @@ function checkSurrounding(TileCoorX, TileCoorY) {
     }
   }
 
-  //Port borderedBoard back to board
+  //Export borderedBoard back to board
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < column; j++) {
       board[i][j] = borderedBoard[i + 1][j + 1];
