@@ -286,15 +286,22 @@ function checkPlaceableTiles() {
     }
   }
   console.log("checkTurn", turn);
-
+  for (let i = 1; i < row + 1; i++) {
+    for (let j = 1; j < column + 1; j++) {
+      if (
+        checkBorderedBoard[i][j] === -2 * turn ||
+        checkBorderedBoard[i][j] === 2 * turn
+      ) {
+        checkBorderedBoard[i][j] = 0;
+      }
+    }
+  }
   let cell = 0;
   for (let i = 1; i < row + 1; i++) {
     for (let j = 1; j < column + 1; j++) {
-      if (checkBorderedBoard[i][j] === -2 * turn) {
-        checkBorderedBoard[i][j] = 0;
-      }
       if (checkBorderedBoard[i][j] === turn) {
         //check east in bordered
+        console.log("checkPT", i, j);
         let borderedBoardX = i;
         let borderedBoardY = j;
         while (
@@ -302,6 +309,20 @@ function checkPlaceableTiles() {
         ) {
           console.log("Check East works");
           borderedBoardY++;
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY+1",
+            borderedBoardY + 1,
+            "value",
+            checkBorderedBoard[borderedBoardX][borderedBoardY + 1]
+          );
           if (checkBorderedBoard[borderedBoardX][borderedBoardY + 1] == 0) {
             console.log("Check east positive");
             checkBorderedBoard[borderedBoardX][borderedBoardY + 1] = 2 * turn;
@@ -316,7 +337,20 @@ function checkPlaceableTiles() {
         ) {
           console.log("Check west works");
           borderedBoardY--;
-          console.log("borderedBoardY", borderedBoardY);
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY-1",
+            borderedBoardY - 1,
+            "value",
+            checkBorderedBoard[borderedBoardX][borderedBoardY - 1]
+          );
           if (checkBorderedBoard[borderedBoardX][borderedBoardY - 1] == 0) {
             console.log("Check west positive");
             checkBorderedBoard[borderedBoardX][borderedBoardY - 1] = 2 * turn;
@@ -331,6 +365,20 @@ function checkPlaceableTiles() {
         ) {
           console.log("Check north works");
           borderedBoardX--;
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX-1",
+            borderedBoardX - 1,
+            "borderedBoardY",
+            borderedBoardY,
+            "value",
+            checkBorderedBoard[borderedBoardX - 1][borderedBoardY]
+          );
           if (checkBorderedBoard[borderedBoardX - 1][borderedBoardY] == 0) {
             console.log("Check north positive");
             checkBorderedBoard[borderedBoardX - 1][borderedBoardY] = 2 * turn;
@@ -345,6 +393,20 @@ function checkPlaceableTiles() {
         ) {
           console.log("Check south works");
           borderedBoardX++;
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX+1",
+            borderedBoardX + 1,
+            "borderedBoardY",
+            borderedBoardY,
+            "value",
+            checkBorderedBoard[borderedBoardX + 1][borderedBoardY]
+          );
           if (checkBorderedBoard[borderedBoardX + 1][borderedBoardY] == 0) {
             console.log("Check south positive");
             checkBorderedBoard[borderedBoardX + 1][borderedBoardY] = 2 * turn;
@@ -360,6 +422,20 @@ function checkPlaceableTiles() {
           console.log("Check SE works");
           borderedBoardX++;
           borderedBoardY++;
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX+1",
+            borderedBoardX + 1,
+            "borderedBoardY+1",
+            borderedBoardY + 1,
+            "value",
+            checkBorderedBoard[borderedBoardX + 1][borderedBoardY + 1]
+          );
           if (checkBorderedBoard[borderedBoardX + 1][borderedBoardY + 1] == 0) {
             console.log("Check SE positive");
             checkBorderedBoard[borderedBoardX + 1][borderedBoardY + 1] =
@@ -376,6 +452,20 @@ function checkPlaceableTiles() {
           console.log("Check NW works");
           borderedBoardX--;
           borderedBoardY--;
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoard-1X",
+            borderedBoardX - 1,
+            "borderedBoardY-1",
+            borderedBoardY - 1,
+            "value",
+            checkBorderedBoard[borderedBoardX - 1][borderedBoardY - 1]
+          );
           if (checkBorderedBoard[borderedBoardX - 1][borderedBoardY - 1] == 0) {
             console.log("Check NW positive");
             checkBorderedBoard[borderedBoardX - 1][borderedBoardY - 1] =
@@ -392,6 +482,20 @@ function checkPlaceableTiles() {
           console.log("Check NE works");
           borderedBoardX--;
           borderedBoardY++;
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX-1",
+            borderedBoardX - 1,
+            "borderedBoardY+1",
+            borderedBoardY + 1,
+            "value",
+            checkBorderedBoard[borderedBoardX - 1][borderedBoardY + 1]
+          );
           if (checkBorderedBoard[borderedBoardX - 1][borderedBoardY + 1] == 0) {
             console.log("Check NE positive");
             checkBorderedBoard[borderedBoardX - 1][borderedBoardY + 1] =
@@ -408,6 +512,21 @@ function checkPlaceableTiles() {
           console.log("Check SW works");
           borderedBoardX++;
           borderedBoardY--;
+          console.log(checkBorderedBoard);
+          console.log(
+            "borderedBoardX",
+            borderedBoardX,
+            "borderedBoardY",
+            borderedBoardY
+          );
+          console.log(
+            "borderedBoardX+1",
+            borderedBoardX + 1,
+            "borderedBoardY-1",
+            borderedBoardY - 1,
+            "value",
+            checkBorderedBoard[borderedBoardX + 1][borderedBoardY - 1]
+          );
           if (checkBorderedBoard[borderedBoardX + 1][borderedBoardY - 1] == 0) {
             console.log("Check SW positive");
             checkBorderedBoard[borderedBoardX + 1][borderedBoardY - 1] =
