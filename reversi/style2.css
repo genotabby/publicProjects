@@ -48,15 +48,22 @@ div {
 
 .pieces {
   border-radius: 50%;
-  transition: background-color 1s ease-out;
+  transition: background-color 0.1s ease-out;
   border-color: red;
-  /* border: 0.1vmin; */
+  border: 10px;
 }
 .pieces:hover {
   transform: scale(1.05);
-  transition: transform 150ms ease-in;
+  /* transition: transform 150ms ease-in; */
   cursor: pointer;
-  border-color: red;
+  /* border-color: red; */
+  background-color: yellow;
+}
+.blackPiece {
+  background-color: black;
+}
+.whitePiece {
+  background-color: white;
 }
 
 fieldset {

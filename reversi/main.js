@@ -108,7 +108,14 @@ function renderBoard() {
       // }
       divPieces.addEventListener("click", playerEvt);
       divSquare.append(divPieces);
-      divPieces.style.backgroundColor = COLORS[cellVal];
+      if (cellVal === -1) {
+        divPieces.classList.add("blackPiece");
+      } else if (cellVal == 1) {
+        divPieces.classList.add("whitePiece");
+      } else {
+        // divPieces.classList.add("blankTile");
+      }
+      // divPieces.style.backgroundColor = COLORS[cellVal];
     });
   });
 }
