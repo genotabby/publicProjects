@@ -23,6 +23,7 @@ let whiteCount = 0;
 let blackCount = 0;
 let possibleWhiteCount = 0;
 let possibleBlackCount = 0;
+let skipCount = 0;
 
 /*----- cached elements  -----*/
 const turnWindow = document.querySelector("#turnWindow");
@@ -71,7 +72,7 @@ function initBoard() {
       }
     }
   }
-  turn = 1;
+  turn = -1;
   winner = null;
   startedGame = true;
   console.log("turn", turn);
@@ -164,9 +165,11 @@ function checkSkip() {
     turn = -turn;
     checkPlaceableTiles();
     checkCount();
+    renderSkipMsg();
+    // skipCount++;
+    checkWinner();
     render();
     console.log("SKIPPED");
-    renderSkipMsg();
     // if (turn == 1) {
     //   skipMsgEl.innerHTML = "No moves available! White turn skipped!";
     // }
@@ -174,13 +177,16 @@ function checkSkip() {
     //   skipMsgEl.innerHTML = "No moves available! Black turn skipped!";
     // }
   }
+  // else {
+  //   skipCount = 0;
+  // }
 }
 function renderSkipMsg() {
   if (turn == 1 && winner == null) {
-    skipMsgEl.innerHTML = "No moves available! Black turn skipped!";
+    skipMsgEl.innerHTML = "Black has no moves available! Black turn skipped!";
   }
   if (turn == -1 && winner == null) {
-    skipMsgEl.innerHTML = "No moves available! White turn skipped!";
+    skipMsgEl.innerHTML = "White has no moves available! White turn skipped!";
   }
 }
 
@@ -191,7 +197,7 @@ function checkWinner() {
   //   console.log("possibleblack 0");
   //   skipTurn = true;
   // }
-  if (trulyEmptyTiles === 0) {
+  if (trulyEmptyTiles === 0 || skipCount === 2) {
     if (blackCount > whiteCount) {
       winner = -1;
       console.log("black wins");
@@ -205,8 +211,12 @@ function checkWinner() {
 }
 
 function renderMessage() {
+  console.log("skipCount", skipCount);
   whiteCountEl.innerHTML = `White count: ${whiteCount}`;
   blackCountEl.innerHTML = `Black count: ${blackCount}`;
+  if (skipCount === 2) {
+    skipMsgEl.innerHTML = "Both players have no moves left!";
+  }
   // turnsLeftEl.innerHTML = `Turns left: ${}`;
   if (winner === -1) {
     msgEl.innerHTML = `Game over!<br><span style="color: ${
@@ -281,6 +291,11 @@ function checkCount() {
     }
   }
   console.log("PWC", possibleWhiteCount, "PBC", possibleBlackCount);
+  if (possibleBlackCount === 0 && possibleWhiteCount === 0) {
+    skipCount++;
+  } else {
+    skipCount = 0;
+  }
 }
 
 function checkPlaceableTiles() {
