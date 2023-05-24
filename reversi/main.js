@@ -72,6 +72,7 @@ function initBoard() {
       }
     }
   }
+  skipMsgEl.innerHTML = "";
   turn = -1;
   winner = null;
   startedGame = true;
