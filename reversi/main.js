@@ -32,7 +32,7 @@ const lengthEl = document.querySelector("#lengthEl");
 const msgEl = document.querySelector(".msgEl");
 const whiteCountEl = document.querySelector("#whiteCount");
 const blackCountEl = document.querySelector("#blackCount");
-const turnsLeftEl = document.querySelector("#turnsLeft");
+const skipMsgEl = document.querySelector("#skipMsg");
 const playAgainButton = document.querySelector("#playAgain");
 const eventsEl = document.querySelector("#events");
 
@@ -141,7 +141,7 @@ function playerEvt(evt) {
     return;
   }
   board[TileCoorX][TileCoorY] = turn;
-
+  skipMsgEl.innerHTML = "";
   checkSurrounding(TileCoorX, TileCoorY);
   turn = -turn;
   checkPlaceableTiles();
@@ -166,6 +166,21 @@ function checkSkip() {
     checkCount();
     render();
     console.log("SKIPPED");
+    renderSkipMsg();
+    // if (turn == 1) {
+    //   skipMsgEl.innerHTML = "No moves available! White turn skipped!";
+    // }
+    // if (turn == -1) {
+    //   skipMsgEl.innerHTML = "No moves available! Black turn skipped!";
+    // }
+  }
+}
+function renderSkipMsg() {
+  if (turn == 1 && winner == null) {
+    skipMsgEl.innerHTML = "No moves available! Black turn skipped!";
+  }
+  if (turn == -1 && winner == null) {
+    skipMsgEl.innerHTML = "No moves available! White turn skipped!";
   }
 }
 
@@ -213,7 +228,7 @@ function renderControls() {
   if (startedGame) {
     startButton.style.visibility = "hidden";
     lengthEl.style.visibility = "hidden";
-    turnsLeftEl.style.visibility = "visible";
+    skipMsgEl.style.visibility = "visible";
     whiteCountEl.style.visibility = "visible";
     blackCountEl.style.visibility = "visible";
     msgEl.style.visibility = "visible";
@@ -226,7 +241,7 @@ function renderControls() {
   } else {
     startButton.style.visibility = "visible";
     lengthEl.style.visibility = "visible";
-    turnsLeftEl.style.visibility = "hidden";
+    skipMsgEl.style.visibility = "hidden";
     whiteCountEl.style.visibility = "hidden";
     blackCountEl.style.visibility = "hidden";
     msgEl.style.visibility = "hidden";
