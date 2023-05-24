@@ -1,8 +1,12 @@
 body {
+  /* border-style: solid; */
+  /* border-width: 50px; */
+  /* : 20%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 50px;
   /* background-color: RGB(105, 207, 254); */
   /* transition: transform 150ms ease-in; */
 }
