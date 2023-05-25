@@ -156,7 +156,6 @@ function checkSkip() {
     checkPlaceableTiles();
     checkCount();
     renderSkipMsg();
-    // skipCount++;
     checkWinner();
     render();
     console.log("SKIPPED");
