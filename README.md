@@ -6,6 +6,7 @@ MVP - Minimum Viable Product
 - Use Javascript for DOM manipulation
 - Hosted on vercel
 - Be displayed in the browser
+- Base functionality of flipping pieces
 
 
 Technologies & Tools used
@@ -15,6 +16,8 @@ Technologies & Tools used
 - CSS
 - Javascript
 - Github
+- Vite
+- Vercel
 
 Description
 -------------
@@ -128,6 +131,10 @@ While coming up with the logic, my favourite function would be the one that flip
 ![](https://i.imgur.com/0DOhInD.png)
 
 # Features
+Scaling in even numbers
+-------------
+The game was built with a scalable array and can be played with an almost unlimited board length. It is limited mainly due to being too small to see once the game goes past 18x18.
+
 Possible placements
 -------------
 Shows what pieces can be placed
