@@ -55,16 +55,55 @@ How to play
 -------------
 This version of Tetris allows some flexibility by allowing a range of board sizes to be chosen.
 ![](https://i.imgur.com/MOwoghP.png)
+
 <br>
+
 Using the official rules from the [World Orthello Federation](https://www.worldothello.org/), black would start first and the objective of this game is to obtain more points than your opponent by having more of your colour covering the board. 
+
 <br>
+
 ![](https://i.imgur.com/zuZcAHL.png)
+
 <br>
+
 Take over the opponents pieces by flanking them with your colour and turning them into your colour. It is possible to reverse multiple pieces in the 8 directions in one turn.
+
 <br>
+
 ![](https://i.imgur.com/FQdzkO4.png)
+
 <br>
-Possible placements are shown on the board and you may select one of the placements to make your move. Once your piece is placed, the turn goes over to your opponent.
+
+Possible placements are shown on the board and you may select one of the placements to make your move. Once your piece is placed, the turn goes over to your opponent. The game ends when all pieces are placed or there are no moves left for both players.
+
+Development Progress
+-------------
+By breaking down the game according to feature priority, I came up with the following development stages:
+- **Stage 1:** Generate the board data in array form
+- **Stage 2:** Create the render functions 
+- **Stage 3:** Create the Reversi game logicts
+- **Stage 4:** Ability to track scores and check winner
+- **Stage 5:** Detect possible moves
+- **Stage 6:** Feature to skip turn if no possible moves
+- **Stage 7:** End the game early if both players have no moves
+
+Key Learnings
+-------------
+1. Using functions to break down code by purpose so it can be reused and is easier to identify which code has what purpose.
+2. Implement the MVC (Model-View-Controller) approach to separate the game logic and display.
+3. It is helpful to place logs at checkpoints and coordinates to help to trace which part of the array is throwing errors and allows to narrow down the problem.
+4. Sometimes checks may look outside of the array which can create unexpected results and errors. Creating a border is one useful method to work around this issue.
+5. Testing a feature separately before merging into the main program can make it easier to narrow down a problem.
+
+Arrays
+-------------
+An array is a collection of data and can store multiple values such as strings and numbers in a single variable. An array can be created within an array for things such as coordinate values and the values can be accessed using the array's index.
+
+![](https://i.imgur.com/nJOWaBl.png)
+
+Conditional atatements
+-------------
+Conditional staments are used to perform different actions based on different conditions
 
 Asset Attributions
 -------------
