@@ -127,7 +127,11 @@ While coming up with the logic, my favourite function would be the one that flip
 
 ![](https://i.imgur.com/0DOhInD.png)
 
-**Features**
+# Features
+Possible placements
+-------------
+Shows what pieces can be placed
+
 Skip turn
 -------------
 Skips a player's turn if there are no moves available
