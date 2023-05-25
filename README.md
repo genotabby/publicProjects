@@ -25,7 +25,7 @@ Objective
 -------------
 The objective of the game is to have the majority of discs facing up on the board showing one's own colour at the end of the game. The game ends when there are no more possible moves and the winner is the player with the most pieces.
 
-How to play
+Rules
 -------------
 1. Black always moves first.
 
@@ -51,6 +51,20 @@ Deployment
 The game is deployed on Vercel and can be played here:<br>
 https://reversi-proj1.vercel.app/
 
+How to play
+-------------
+This version of Tetris allows some flexibility by allowing a range of board sizes to be chosen.
+![](https://i.imgur.com/MOwoghP.png)
+<br>
+Using the official rules from the [World Orthello Federation](https://www.worldothello.org/), black would start first and the objective of this game is to obtain more points than your opponent by having more of your colour covering the board. 
+<br>
+![](https://i.imgur.com/zuZcAHL.png)
+<br>
+Take over the opponents pieces by flanking them with your colour and turning them into your colour. It is possible to reverse multiple pieces in the 8 directions in one turn.
+<br>
+![](https://i.imgur.com/FQdzkO4.png)
+<br>
+Possible placements are shown on the board and you may select one of the placements to make your move. Once your piece is placed, the turn goes over to your opponent.
 
 Asset Attributions
 -------------
