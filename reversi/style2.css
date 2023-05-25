@@ -72,12 +72,12 @@ div {
 }
 
 .possibleWhitePiece:hover {
-  opacity: 80%;
+  opacity: 50%;
   transform: scale(1.2);
 }
 
 .possibleBlackPiece:hover {
-  opacity: 80%;
+  opacity: 50%;
   transform: scale(1.2);
 }
 
