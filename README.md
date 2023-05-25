@@ -101,9 +101,36 @@ An array is a collection of data and can store multiple values such as strings a
 
 ![](https://i.imgur.com/nJOWaBl.png)
 
-Conditional atatements
+Conditional statements
 -------------
 Conditional staments are used to perform different actions based on different conditions
+
+![](https://i.imgur.com/HrVp1Ub.png)
+
+Bridging HTML and CSS using DOM
+-------------
+By using query selectors and event listeners, we can pull user input data to be processed and exported once the logic is processed.
+![](https://i.imgur.com/44fFMLa.png)
+<br>
+![](https://i.imgur.com/SijX2mk.png)
+
+Functions
+-------------
+Functions allows us to reuse code and trigger repeated scenarios together with Conditional Statements and the DOM.
+
+![](https://i.imgur.com/jRhyteb.png)
+
+Favourite Functions
+-------------
+While coming up with the logic, my favourite function would be the one that flips all the tiles in a row. When a piece is placed, the computer does not know how many tiles to check and so a while loop is used. At the same time it counts the number of checks it made. Once it meets a matching piece, it will backtrack and flip all the tiles it checked earlier. 
+
+![](https://i.imgur.com/0DOhInD.png)
+
+Summary
+-------------
+While this game seemed simple enough with some visual complexity, trying to recreate it in code was much more complex than expected. Trying to implement features and ensuring that they all work together relied heavily on understanding the code flow together with trial and error. 
+
+As the first step is always the hardest, starting small with simple structures will lead to more development paths opening up.
 
 Asset Attributions
 -------------
