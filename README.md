@@ -54,6 +54,7 @@ https://reversi-proj1.vercel.app/
 How to play
 -------------
 This version of Tetris allows some flexibility by allowing a range of board sizes to be chosen.
+
 ![](https://i.imgur.com/MOwoghP.png)
 
 <br>
