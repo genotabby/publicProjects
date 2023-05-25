@@ -1,9 +1,4 @@
 /*----- constants -----*/
-// import "./style.css";
-// import javascriptLogo from "./javascript.svg";
-// import viteLogo from "/vite.svg";
-// import { setupCounter } from "./counter.js";
-
 const COLORS = {
   0: "rgb(84,150,109)",
   1: "white",
@@ -16,7 +11,6 @@ let turn = 1; // 1 or -1
 let winner = null; //null = no winner; 1 or -1 = winner; 'T' = Tie
 let startedGame = null;
 let skipTurn = false;
-// let maxTurns;
 let blankCount;
 let length;
 let whiteCount = 0;
@@ -60,7 +54,6 @@ function initBoard() {
   changeRowColumnGridStyle(length);
   for (let i = 0; i < row; i++) {
     startingBoard[i] = [];
-    // console.log("row", board);
     for (let j = 0; j < column; j++) {
       if (i == length / 2 && j == length / 2) {
         startingBoard[i][j] = 1;
@@ -92,7 +85,6 @@ function render() {
 
 function renderBoard() {
   //Clear everything
-  // checkPlaceableTiles();
   boardSection.innerHTML = "";
   let cell = 0;
   board.forEach(function (colArr, colIdx) {
@@ -126,7 +118,6 @@ function renderBoard() {
           divPieces.classList.add("blackTurn");
         }
       }
-      // divPieces.style.backgroundColor = COLORS[cellVal];
     });
   });
 }
@@ -153,8 +144,6 @@ function playerEvt(evt) {
   render();
   checkSkip();
   console.log("turn", turn);
-
-  // console.log("turnAftSkip", turn);
 }
 
 function checkSkip() {
@@ -171,16 +160,7 @@ function checkSkip() {
     checkWinner();
     render();
     console.log("SKIPPED");
-    // if (turn == 1) {
-    //   skipMsgEl.innerHTML = "No moves available! White turn skipped!";
-    // }
-    // if (turn == -1) {
-    //   skipMsgEl.innerHTML = "No moves available! Black turn skipped!";
-    // }
   }
-  // else {
-  //   skipCount = 0;
-  // }
 }
 function renderSkipMsg() {
   if (turn == 1 && winner == null) {
@@ -194,10 +174,6 @@ function renderSkipMsg() {
 function checkWinner() {
   let trulyEmptyTiles = blankCount + possibleBlackCount + possibleWhiteCount;
 
-  // if () {
-  //   console.log("possibleblack 0");
-  //   skipTurn = true;
-  // }
   if (trulyEmptyTiles === 0 || skipCount === 2) {
     if (blackCount > whiteCount) {
       winner = -1;
@@ -218,7 +194,6 @@ function renderMessage() {
   if (skipCount === 2) {
     skipMsgEl.innerHTML = "Both players have no moves left!";
   }
-  // turnsLeftEl.innerHTML = `Turns left: ${}`;
   if (winner === -1) {
     msgEl.innerHTML = `Game over!<br><span style="color: ${
       COLORS[-1]

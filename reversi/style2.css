@@ -1,36 +1,22 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Ultra&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Corben:wght@700&display=swap");
 body {
-  /* font-family: "Ultra", serif; */
   font-family: "Corben", cursive;
-  /* border-style: solid; */
-  /* border-width: 50px; */
-  /* : 20%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-bottom: 50px;
-  /* background-image: linear-gradient(RGB(105, 207, 254), blue); */
   background-image: linear-gradient(RGB(234, 234, 234), RGB(116, 116, 116));
-  /* background-color: RGB(105, 207, 254); */
-  /* transition: transform 150ms ease-in; */
 }
 
 .board {
   display: grid;
   border: 100px;
   background-color: aqua;
-  /* grid-template-columns: repeat(3, 10vmin); */
-  /* grid-template-rows: repeat(3, 10vmin);
-  gap: 1vmin;
-  margin-top: 0vmin; */
 }
 
 #board {
   display: grid;
-  /* margin: 10px; */
-  /* padding: 10px; */
   grid-template-columns: repeat(0, 10vmin);
   grid-template-rows: repeat(0, 10vmin);
   gap: 0.5vmin;
@@ -39,9 +25,7 @@ body {
 }
 
 div {
-  /* boarder-radius 0% for square, 100% for circle */
   border-radius: 0%;
-  /* border: 0.1vmin solid red; */
   width: 95%;
   height: 95%;
   margin: 2.5%;
@@ -68,13 +52,6 @@ div {
   border: 10px;
   transition: transform 150ms ease-in;
 }
-/* .blankTile:hover {
-  transform: scale(1.05); */
-/* transition: transform 150ms ease-in; */
-/* cursor: pointer; */
-/* border-color: red; */
-/* background-color: yellow;
-} */
 .possibleWhitePiece {
   background-color: white;
   opacity: 30%;
@@ -95,16 +72,13 @@ div {
 }
 
 .possibleWhitePiece:hover {
-  /* background-color: white; */
   opacity: 80%;
   transform: scale(1.2);
-  /* transition: transform 150ms ease-in; */
 }
+
 .possibleBlackPiece:hover {
-  /* background-color: black; */
   opacity: 80%;
   transform: scale(1.2);
-  /* transition: transform 150ms ease-in; */
 }
 
 .blackPiece {
@@ -137,84 +111,3 @@ body {
     background-position: 0% 50%;
   }
 }
-/* Import */
-/* Cool infinite background scrolling animation.
- * Twitter: @kootoopas
- */
-/* ref:https://codepen.io/alvarotrigo/pen/RwYYBZP */
-/* Exo thin font from Google. */
-/* @import url(https://fonts.googleapis.com/css?family=Exo:100); */
-/* Background data (Original source: https://subtlepatterns.com/grid-me/) */
-/* Animations */
-/* @-webkit-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
-}
-@-moz-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
-}
-@-o-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
-}
-@keyframes bg-scrolling-reverse {
-  100% {
-    background-position: 50px 50px;
-  }
-}
-@-webkit-keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
-}
-@-moz-keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
-}
-@-o-keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
-}
-@keyframes bg-scrolling {
-  0% {
-    background-position: 50px 50px;
-  }
-} */
-/* Main styles */
-/* body { */
-/* margin-top: 13.5rem; */
-/* color: #999; */
-/* font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif; */
-/* text-align: center; */
-/* img size is 50x50 */
-/* background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC")
-    repeat 0 0; */
-/* background: url(https://www.toptal.com/designers/subtlepatterns/uploads/triangles_pattern.png)
-    repeat 0 0; */
-/* background: url(https://www.toptal.com/designers/subtlepatterns/uploads/repeated-square.png)
-    repeat 0 0; */
-/* -webkit-animation: bg-scrolling-reverse 2s infinite; */
-/* Safari 4+ */
-/* -moz-animation: bg-scrolling-reverse 2s infinite; */
-/* Fx 5+ */
-/* -o-animation: bg-scrolling-reverse 2s infinite; */
-/* Opera 12+ */
-/* animation: bg-scrolling-reverse 2s infinite; */
-/* IE 10+ */
-/* -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
-  -o-animation-timing-function: linear;
-  animation-timing-function: linear;
-} */
-/* body::before { */
-/* content: "INFINITY"; */
-/* font-size: 8rem;
-  font-weight: 100;
-  font-style: normal; */
-/* } */
