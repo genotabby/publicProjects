@@ -172,9 +172,8 @@ function renderSkipMsg() {
 }
 
 function checkWinner() {
-  let trulyEmptyTiles = blankCount + possibleBlackCount + possibleWhiteCount;
-
-  if (trulyEmptyTiles === 0 || skipCount === 2) {
+  // let trulyEmptyTiles = blankCount + possibleBlackCount + possibleWhiteCount;
+  if (skipCount === 2) {
     if (blackCount > whiteCount) {
       winner = -1;
       console.log("black wins");
