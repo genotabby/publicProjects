@@ -127,6 +127,19 @@ While coming up with the logic, my favourite function would be the one that flip
 
 ![](https://i.imgur.com/0DOhInD.png)
 
+**Features**
+Skip turn
+-------------
+Skips a player's turn if there are no moves available
+
+![](https://i.imgur.com/6NkMQE5.jpg)
+
+End game early
+-------------
+Ends the game if both players have no moves left and the player with most points win
+
+![](https://i.imgur.com/E7lZVU8.jpg)
+
 Summary
 -------------
 While this game seemed simple enough with some visual complexity, trying to recreate it in code was much more complex than expected. Trying to implement features and ensuring that they all work together relied heavily on understanding the code flow together with trial and error. 
