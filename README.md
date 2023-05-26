@@ -1,4 +1,4 @@
-# Developting a Reversi game
+# Developing a Reversi game
 Project Brief
 -------------
 MVP - Minimum Viable Product
