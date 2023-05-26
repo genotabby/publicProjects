@@ -47,7 +47,7 @@ again. However, if a move is available to you, you may not forfeit your turn.
 
 Note: It is possible for a game to end before all 64 squares are filled.
 
-Rules were obtained from https://www.worldothello.org/about/about-othello/othello-rules/official-rules/english
+Rules were obtained from the [World Orthello Federation](https://www.worldothello.org/about/about-othello/othello-rules/official-rules/english)
 
 Deployment
 -------------
