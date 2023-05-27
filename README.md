@@ -16,6 +16,7 @@ Technologies & Tools used
 - CSS
 - Javascript
 - Github
+- VSCode
 - Vite
 - Vercel
 
